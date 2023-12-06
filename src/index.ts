@@ -22,6 +22,7 @@ export async function activate(context: ExtensionContext) {
     const type = getType(obj) || getType(text)
     const { line, character } = getSelection()!
 
+    // todo: 判断当前的位置如果后面跟着(),则用<>包裹，否则用：string的形式
     updateText((edit) => {
       edit.insert(new Position(line, character), type)
     })
