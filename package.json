@@ -1,7 +1,7 @@
 {
   "publisher": "simonhe",
   "name": "to-ts-type",
-  "displayName": "to-ts-type",
+  "displayName": "To Ts Type",
   "version": "0.0.0",
   "packageManager": "pnpm@8.10.5",
   "description": "to-ts-type",
