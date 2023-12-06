@@ -29,7 +29,11 @@ export function getType(obj: any): string {
       const v = obj[key]
       record[key] = getType(v)
     }
-    return JSON.stringify(record)
+    return `${Object.keys(record).reduce((result, key) => {
+      const value = record[key]
+      result += `${key}: ${value}; `
+      return result
+    }, '{ ')}}`
   }
   else if (typeof obj === 'string') {
     return 'string'
