@@ -20,12 +20,14 @@ describe('should', () => {
     },
   }
   const data6 = ['123']
+
+  const data7 = ['123', 123]
   it('data1', () => {
-    expect(getType(data1)).toMatchInlineSnapshot('"{\\"name\\":\\"string\\"}"')
+    expect(getType(data1)).toMatchInlineSnapshot('"{ name: string; }"')
   })
 
   it('data2', () => {
-    expect(getType(data2)).toMatchInlineSnapshot('"{\\"name\\":\\"string\\",\\"data\\":\\"{\\\\\\"name\\\\\\":\\\\\\"string\\\\\\",\\\\\\"age\\\\\\":\\\\\\"number\\\\\\"}[]\\"}"')
+    expect(getType(data2)).toMatchInlineSnapshot('"{ name: string; data: { name: string; age: number; }[]; }"')
   })
 
   it('data3', () => {
@@ -37,10 +39,14 @@ describe('should', () => {
   })
 
   it('data5', () => {
-    expect(getType(data5)).toMatchInlineSnapshot('"{\\"get\\":\\"Function\\"}"')
+    expect(getType(data5)).toMatchInlineSnapshot('"{ get: Function; }"')
   })
 
   it('data6', () => {
     expect(getType(data6)).toMatchInlineSnapshot('"string[]"')
+  })
+
+  it('data7', () => {
+    expect(getType(data7)).toMatchInlineSnapshot('"(string | number)[]"')
   })
 })

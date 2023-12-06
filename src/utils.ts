@@ -7,15 +7,26 @@ export function getType(obj: any): string {
       // 空数组
       return '[]'
     }
-    else if (typeof item === 'string') {
-      return 'string[]'
+    if (obj.length === 1) {
+      if (typeof item === 'string')
+        return 'string[]'
+      else if (isNum(item))
+        return 'number[]'
+      else if (typeof item === 'object')
+        return `${getType(item)}[]`
     }
-    else if (typeof item === 'object') {
-      return `${getType(item)}[]`
-    }
-    else {
-      return `unknown[]`
-    }
+
+    return `(${obj.map((o) => {
+      if (typeof o === 'string')
+        return 'string'
+      else if (isNum(o))
+        return 'number'
+      else if (typeof o === 'object')
+        return getType(item)
+      else if (o instanceof Function)
+        return 'Function'
+      return 'unkown'
+    }).join(' | ')})[]`
   }
   else if (obj === null) {
     return 'null'
