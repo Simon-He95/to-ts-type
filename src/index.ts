@@ -23,7 +23,7 @@ export async function activate(context: ExtensionContext) {
     const { line, character } = getSelection()!
 
     updateText((edit) => {
-      edit.insert(new Position(line, character), `: ${type}`)
+      edit.insert(new Position(line, character), type)
     })
 
     message.info(`🎉 ${isZh ? '转换成功！' : 'Successful conversion!'}`)
