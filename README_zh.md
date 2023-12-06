@@ -5,6 +5,8 @@
 
 将 `copy` 的数据结果转换成 `ts` 类型
 
+![demo](/assets/demo.gif)
+
 ## :coffee:
 
 [请我喝一杯咖啡](https://github.com/Simon-He95/sponsor)
