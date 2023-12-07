@@ -7,6 +7,9 @@
 
 ![demo](/assets/demo.gif)
 
+## 快捷键
+- `ctrl+alt+t` or `cmd+alt+t` -> `to ts type`
+
 ## :coffee:
 
 [请我喝一杯咖啡](https://github.com/Simon-He95/sponsor)

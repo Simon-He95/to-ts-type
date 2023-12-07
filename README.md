@@ -8,6 +8,9 @@ Convert the data results of `copy` to `ts` type
 
 ![demo](/assets/demo.gif)
 
+## Keybindings
+- `ctrl+alt+t` or `cmd+alt+t` -> `to ts type`
+
 ## :coffee:
 
 [buy me a cup of coffee](https://github.com/Simon-He95/sponsor)

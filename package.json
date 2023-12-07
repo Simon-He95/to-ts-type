@@ -37,7 +37,7 @@
     "commands": [
       {
         "command": "to-ts-type.transform",
-        "title": "page -> Unocss"
+        "title": "to-ts-type"
       }
     ],
     "keybindings": [
