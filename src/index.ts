@@ -1,13 +1,11 @@
-import { getCopyText, getLocale, getSelection, message, registerCommand, updateText } from '@vscode-use/utils'
+import { nextTick } from 'node:process'
+import { getCopyText, getSelection, registerCommand, setSelection, updateText } from '@vscode-use/utils'
 import { useJSONParse } from 'lazy-js-utils'
 import { type Disposable, type ExtensionContext, Position } from 'vscode'
 import { getType } from './utils'
 
 export async function activate(context: ExtensionContext) {
   const disposes: Disposable[] = []
-  const lan = getLocale()
-  const isZh = lan.includes('zh')
-
   disposes.push(registerCommand('to-ts-type.transform', async () => {
     const text = await getCopyText()
     if (!text)
@@ -20,18 +18,40 @@ export async function activate(context: ExtensionContext) {
       return
 
     const type = getType(obj) || getType(text)
-    const { line, character } = getSelection()!
+    const { line, character, lineText } = getSelection()!
+    const beforeChar = getBeforeFirstNotSpaceChar(lineText, character)
 
-    // todo: 判断当前的位置如果后面跟着(),则用<>包裹，否则用：string的形式
+    let insertText = ''
+    if (beforeChar === '(') {
+      insertText = `<${type}>`
+    }
+    else if (beforeChar === ':') {
+      insertText = type
+    }
+    else if (beforeChar) {
+      insertText = `: ${type}`
+    }
+    else {
+      insertText = `type IType = ${type}`
+      nextTick(() => {
+        setSelection([line, character + 'type '.length], [line, character + 'type IType'.length])
+      })
+    }
     updateText((edit) => {
-      edit.insert(new Position(line, character), type)
+      edit.insert(new Position(line, character), insertText)
     })
-
-    message.info(`🎉 ${isZh ? '转换成功！' : 'Successful conversion!'}`)
   }))
   context.subscriptions.push(...disposes)
 }
 
 export function deactivate() {
 
+}
+
+function getBeforeFirstNotSpaceChar(text: string, character: number) {
+  for (let i = character; i >= 0; i--) {
+    if (text[i] !== ' ')
+      return text[i]
+  }
+  return ''
 }
