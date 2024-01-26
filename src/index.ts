@@ -1,7 +1,6 @@
-import { nextTick } from 'node:process'
-import { getCopyText, getSelection, registerCommand, setSelection, updateText } from '@vscode-use/utils'
-import { useJSONParse } from 'lazy-js-utils'
+import { getCopyText, getSelection, nextTick, registerCommand, setSelection, updateText } from '@vscode-use/utils'
 import { type Disposable, type ExtensionContext, Position } from 'vscode'
+import { useJSONParse } from 'lazy-js-utils'
 import { getType } from './utils'
 
 export async function activate(context: ExtensionContext) {
@@ -11,8 +10,7 @@ export async function activate(context: ExtensionContext) {
     if (!text)
       return
     // text 需要过滤 一些注释比如// 或者 /** */
-    const filteredText = text.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '').replace(/'/g, '"').trim()
-    const obj = useJSONParse(filteredText)
+    const obj = useJSONParse(text)
 
     if (!obj)
       return

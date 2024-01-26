@@ -16,7 +16,7 @@ export function getType(obj: any): string {
         return `${getType(item)}[]`
     }
 
-    return `(${obj.map((o) => {
+    const r = [...new Set(obj.map((o) => {
       if (typeof o === 'string')
         return 'string'
       else if (isNum(o))
@@ -26,7 +26,10 @@ export function getType(obj: any): string {
       else if (o instanceof Function)
         return 'Function'
       return 'unkown'
-    }).join(' | ')})[]`
+    }))]
+    return r.length === 1
+      ? `${r[0]}[]`
+      : `(${r.join(' | ')})[]`
   }
   else if (obj === null) {
     return 'null'
@@ -34,7 +37,7 @@ export function getType(obj: any): string {
   else if (typeof obj === 'object') {
     const record: Record<string, any> = {}
     if (!Object.keys(obj).length)
-      return `Record<string, any>`
+      return 'Object'
 
     for (const key in obj) {
       const v = obj[key]
@@ -42,6 +45,8 @@ export function getType(obj: any): string {
     }
     return `${Object.keys(record).reduce((result, key) => {
       const value = record[key]
+      if (/[\:\-]/.test(key))
+        key = `"${key}"`
       result += `${key}: ${value}; `
       return result
     }, '{ ')}}`
@@ -54,6 +59,9 @@ export function getType(obj: any): string {
   }
   else if (obj instanceof Function) {
     return 'Function'
+  }
+  else if (typeof obj === 'boolean') {
+    return 'boolean'
   }
   else if (obj) {
     return obj.toString()
