@@ -3,7 +3,7 @@
 </p>
 <p align="center"> <a href="./README.md">English</a> | 简体中文</p>
 
-将 `copy` 的数据结果转换成 `ts` 类型
+将 `copy` 的数据结果转换成 `ts` 类型，你可以将后端定义的结构体或请求的 json，直接复制 obj，然后使用快捷键，转换成类型，这样你在写前端代码时，就会得到一个很好的类型提示了
 
 ![demo](/assets/demo.gif)
 
