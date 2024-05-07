@@ -23,7 +23,7 @@ export async function activate(context: ExtensionContext) {
     if (beforeChar === '(') {
       insertText = `<${type}>`
     }
-    else if (beforeChar === ':') {
+    else if (/[:<]/.test(beforeChar)) {
       insertText = type
     }
     else if (beforeChar) {
@@ -48,7 +48,7 @@ export function deactivate() {
 
 function getBeforeFirstNotSpaceChar(text: string, character: number) {
   for (let i = character; i >= 0; i--) {
-    if (text[i] !== ' ')
+    if (text[i] && text[i] !== ' ')
       return text[i]
   }
   return ''

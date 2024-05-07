@@ -25,7 +25,7 @@ export function getType(obj: any): string {
         return getType(item)
       else if (o instanceof Function)
         return 'Function'
-      return 'unkown'
+      return 'unknown'
     }))]
     return r.length === 1
       ? `${r[0]}[]`
@@ -47,9 +47,9 @@ export function getType(obj: any): string {
       const value = record[key]
       if (/[\:\-]/.test(key))
         key = `"${key}"`
-      result += `${key}: ${value}; `
+      result += `\n  ${key}: ${value};`
       return result
-    }, '{ ')}}`
+    }, '{ ')}\n}`
   }
   else if (typeof obj === 'string') {
     return 'string'
