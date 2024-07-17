@@ -3,7 +3,6 @@
 </p>
 <p align="center"> English | <a href="./README_zh.md">简体中文</a></p>
 
-
 Convert the data results of `copy` to `ts` type. You can directly copy the structure defined by the backend or the requested json into obj, and then use the shortcut keys to convert it into a type. This way you will get a good type hint when writing front-end code.
 
 ![demo](/assets/demo.gif)

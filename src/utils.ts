@@ -45,7 +45,7 @@ export function getType(obj: any): string {
     }
     return `${Object.keys(record).reduce((result, key) => {
       const value = record[key]
-      if (/[\:\-]/.test(key))
+      if (/[:\-]/.test(key))
         key = `"${key}"`
       result += `\n  ${key}: ${value};`
       return result
@@ -69,4 +69,12 @@ export function getType(obj: any): string {
   else {
     return 'any'
   }
+}
+
+export function getBeforeFirstNotSpaceChar(text: string, character: number) {
+  for (let i = character - 1; i >= 0; i--) {
+    if (text[i] && text[i] !== ' ')
+      return text[i]
+  }
+  return ''
 }
