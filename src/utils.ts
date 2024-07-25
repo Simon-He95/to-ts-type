@@ -32,16 +32,27 @@ export function getType(obj: any): string {
       : `(${r.join(' | ')})[]`
   }
   else if (obj === null) {
-    return 'null'
+    return 'unknown'
   }
   else if (typeof obj === 'object') {
     const record: Record<string, any> = {}
     if (!Object.keys(obj).length)
-      return 'Object'
+      return 'object'
 
     for (const key in obj) {
       const v = obj[key]
-      record[key] = getType(v)
+      if (v === 'null') {
+        // 根据一些常用名推断一下 是否是 string ｜ number, 否则返回 unknown
+        if (/phone|name|desc|address|src|label|type/i.test(key)) {
+          record[key] = 'string'
+        }
+        else {
+          record[key] = 'unknown'
+        }
+      }
+      else {
+        record[key] = getType(v)
+      }
     }
     return `${Object.keys(record).reduce((result, key) => {
       const value = record[key]
