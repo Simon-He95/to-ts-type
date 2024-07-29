@@ -82,10 +82,10 @@ export function getType(obj: any): string {
   }
 }
 
-export function getBeforeFirstNotSpaceChar(text: string, character: number) {
+export function getBeforeFirstNotSpaceChar(text: string, character: number): [string, number] {
   for (let i = character - 1; i >= 0; i--) {
     if (text[i] && text[i] !== ' ')
-      return text[i]
+      return [text[i], i]
   }
-  return ''
+  return ['', character]
 }

@@ -1,5 +1,4 @@
-import { createExtension, getCopyText, getSelection, nextTick, registerCommand, setSelection, updateText } from '@vscode-use/utils'
-import { Position } from 'vscode'
+import { createExtension, createPosition, createRange, getCopyText, getSelection, insertText as insertSnippetText, registerCommand, updateText } from '@vscode-use/utils'
 import { useJSONParse } from 'lazy-js-utils'
 import { getBeforeFirstNotSpaceChar, getType } from './utils'
 
@@ -19,8 +18,8 @@ export = createExtension(() => {
       }
 
       const type = getType(obj) || getType(text)
-      const { line, character, lineText } = getSelection()!
-      const beforeChar = getBeforeFirstNotSpaceChar(lineText, character)
+      const { line, character, lineText, selection } = getSelection()!
+      const [beforeChar, newChar] = getBeforeFirstNotSpaceChar(lineText, character)
 
       let insertText = ''
       if (beforeChar === '(') {
@@ -30,17 +29,24 @@ export = createExtension(() => {
         insertText = type
       }
       else if (beforeChar) {
-        insertText = `: ${type}`
+        if (beforeChar === 't' && lineText.slice(newChar - 'export'.length + 1, newChar + 1) === 'export')
+          insertText = type
+        else
+          insertText = `: ${type}`
       }
       else {
-        insertText = `type IType = ${type}`
-        nextTick(() => {
-          setSelection([line, character + 'type '.length], [line, character + 'type IType'.length])
+        insertText = `type \${1:IType} = ${type}`
+      }
+      const { start, end } = selection
+      if (start.line !== end.line || start.character !== end.character) {
+        //  替换
+        updateText((edit) => {
+          edit.replace(createRange(start.line, start.character, end.line, end.character), insertText.replace(/^: /, ''))
         })
       }
-      updateText((edit) => {
-        edit.insert(new Position(line, character), insertText)
-      })
+      else {
+        insertSnippetText(insertText, createPosition(line, character))
+      }
     }),
   ]
 })
