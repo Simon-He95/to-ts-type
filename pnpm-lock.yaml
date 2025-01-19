@@ -36,8 +36,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       lazy-js-utils:
-        specifier: ^0.1.27
-        version: 0.1.27
+        specifier: ^0.1.28
+        version: 0.1.28
       pnpm:
         specifier: ^8.15.9
         version: 8.15.9
@@ -2193,8 +2193,8 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
-  lazy-js-utils@0.1.27:
-    resolution: {integrity: sha512-6NjFRl/VvxIQ3EdEJuE2DAWT3h4wCVSTFcOyEkme+VYxDlkfjDA3gB3TzoiLvWK1w/Ufzq0ZQN8Tj5Hpvq9VDQ==}
+  lazy-js-utils@0.1.28:
+    resolution: {integrity: sha512-nFpbWygC3AVRtQXJ/jXCKMAfUvO5gnjeHKceek3vr89F4hdvyTBdQzsfv7xv8Buez/7xkPWSePxTe2V/iIfDHA==}
 
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -5644,7 +5644,7 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  lazy-js-utils@0.1.27:
+  lazy-js-utils@0.1.28:
     dependencies:
       htmlparser2: 8.0.2
       qrcode: 1.5.4
