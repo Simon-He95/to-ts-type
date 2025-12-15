@@ -24,9 +24,6 @@
   ],
   "main": "./dist/index.js",
   "icon": "icon.png",
-  "files": [
-    "dist"
-  ],
   "engines": {
     "vscode": "^1.77.0"
   },
