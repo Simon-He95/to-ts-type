@@ -28,10 +28,10 @@
     "dist"
   ],
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.77.0"
   },
   "activationEvents": [
-    "onStartupFinished"
+    "onCommand:to-ts-type.transform"
   ],
   "contributes": {
     "commands": [
@@ -65,21 +65,16 @@
     "release": "bumpp && pnpm run publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.27.3",
-    "@simon_he/eslint-config": "^0.0.6",
-    "@types/node": "^18.19.68",
-    "@types/vscode": "^1.96.0",
+    "@antfu/eslint-config": "^6.7.1",
+    "@types/node": "^18.19.130",
+    "@types/vscode": "1.77.0",
     "@vscode-use/utils": "0.1.11",
-    "bumpp": "^9.9.2",
-    "eslint": "^8.57.1",
-    "esno": "^0.16.3",
-    "flatted": "^3.3.2",
-    "lazy-js-utils": "^0.1.28",
-    "pnpm": "^8.15.9",
-    "rimraf": "^4.4.1",
+    "@vscode/vsce": "^3.7.0",
+    "bumpp": "^9.11.1",
+    "eslint": "^9.39.2",
+    "lazy-js-utils": "^0.1.49",
     "tsup": "^6.7.0",
-    "typescript": "^5.7.2",
-    "vitest": "^0.29.8",
-    "vsce": "^2.15.0"
+    "typescript": "^5.9.3",
+    "vitest": "^0.29.8"
   }
 }

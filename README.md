@@ -7,6 +7,10 @@ Convert the data results of `copy` to `ts` type. You can directly copy the struc
 
 ![demo](/assets/demo.gif)
 
+Notes:
+- Supports JSON with `//` and `/* */` comments, and simple JS object literals.
+- Clipboard parsing is safe (does not execute code). If parsing fails, it falls back to `string`.
+
 ## Keybindings
 - `ctrl+alt+t` or `cmd+alt+t` -> `to ts type`
 

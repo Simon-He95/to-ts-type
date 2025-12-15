@@ -20,8 +20,11 @@ describe('should', () => {
     },
   }
   const data6 = ['123']
+  const dataEmptyArray: any[] = []
 
   const data7 = ['123', 123]
+  const data8 = [{ a: 1 }, { b: 'x' }]
+  const data9 = { maybe: null }
   it('data1', () => {
     expect(getType(data1)).toMatchInlineSnapshot('"{ name: string; }"')
   })
@@ -46,7 +49,19 @@ describe('should', () => {
     expect(getType(data6)).toMatchInlineSnapshot('"string[]"')
   })
 
+  it('dataEmptyArray', () => {
+    expect(getType(dataEmptyArray)).toMatchInlineSnapshot('"unknown[]"')
+  })
+
   it('data7', () => {
     expect(getType(data7)).toMatchInlineSnapshot('"(string | number)[]"')
+  })
+
+  it('data8', () => {
+    expect(getType(data8)).toMatchInlineSnapshot('"({ a: number; } | { b: string; })[]"')
+  })
+
+  it('data9', () => {
+    expect(getType(data9)).toMatchInlineSnapshot('"{ maybe: null; }"')
   })
 })

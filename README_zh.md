@@ -7,6 +7,10 @@
 
 ![demo](/assets/demo.gif)
 
+备注：
+- 支持带 `//`、`/* */` 注释的 JSON（JSONC），以及简单的 JS 对象字面量。
+- 剪贴板解析是安全的（不会执行代码）；解析失败会降级为 `string`。
+
 ## 快捷键
 - `ctrl+alt+t` or `cmd+alt+t` -> `to ts type`
 

@@ -1,22 +1,22 @@
-import { createExtension, createPosition, createRange, getCopyText, getSelection, insertText as insertSnippetText, registerCommand, updateText } from '@vscode-use/utils'
-import { useJSONParse } from 'lazy-js-utils'
-import { getBeforeFirstNotSpaceChar, getType } from './utils'
+import { createExtension, createPosition, createRange, getCopyText, getSelection, insertText as insertSnippetText, message, registerCommand, updateText } from '@vscode-use/utils'
+import { getBeforeFirstNotSpaceChar, getType, parseClipboardData } from './utils'
 
 export = createExtension(() => {
   registerCommand('to-ts-type.transform', async () => {
     const text = await getCopyText()
     if (!text)
       return
-    // text 需要过滤 一些注释比如// 或者 /** */
-    let obj
-    try {
-      obj = useJSONParse(text)
-    }
-    catch (error) {
-      console.error(error)
-    }
 
-    const type = getType(obj) || getType(text)
+    const parsed = parseClipboardData(text)
+    const maybeStructured = /^\s*(?:[{[]|export\s+default\s+|return\s+|(?:const|let|var)\s+)/.test(text)
+    if (parsed === undefined && maybeStructured) {
+      message.warn({
+        message: 'to-ts-type: parse failed, falling back to string',
+        buttons: [],
+        detail: 'Clipboard is not valid JSON / JS object literal (comments are OK).',
+      })
+    }
+    const type = parsed === undefined ? getType(text) : getType(parsed)
     const { line, character, lineText, selection } = getSelection()!
     const [beforeChar, newChar] = getBeforeFirstNotSpaceChar(lineText, character)
 
