@@ -22,7 +22,7 @@
   "categories": [
     "Other"
   ],
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.77.0"
@@ -53,7 +53,7 @@
   "scripts": {
     "dev": "pnpm build --watch",
     "test": "vitest",
-    "build": "tsup src/index.ts --external vscode",
+    "build": "tsup src/index.ts --external vscode --format cjs",
     "pack": "vsce package --no-dependencies",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --fix",
@@ -66,12 +66,12 @@
     "@types/node": "^18.19.130",
     "@types/vscode": "1.77.0",
     "@vscode-use/utils": "0.1.11",
-    "@vscode/vsce": "^3.7.0",
+    "@vscode/vsce": "^3.7.1",
     "bumpp": "^9.11.1",
     "eslint": "^9.39.2",
     "lazy-js-utils": "^0.1.49",
-    "tsup": "^6.7.0",
+    "tsdown": "^0.18.1",
     "typescript": "^5.9.3",
-    "vitest": "^0.29.8"
+    "vitest": "^4.0.16"
   }
 }
